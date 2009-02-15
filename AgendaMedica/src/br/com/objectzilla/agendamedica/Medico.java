@@ -10,6 +10,10 @@ public class Medico {
 		this.nome = nome;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+	
 	public Paciente consulta(Calendar horario) {
 		return agenda.get(horario);
 	}

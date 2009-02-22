@@ -7,5 +7,6 @@ import javax.ejb.Local;
 @Local
 public interface Agendamento {
 
-	void marcaConsulta(long medico, long paciente, Calendar horario);
+	void marcaConsulta(long medico, long paciente, Calendar horario)
+			throws PacienteNaoEncontradoException, MedicoNaoEncontradoException;
 }

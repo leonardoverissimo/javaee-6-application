@@ -2,21 +2,44 @@ package br.com.objectzilla.agendamedica;
 
 import java.util.Calendar;
 
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Assert;
 import org.junit.Test;
-
 
 public class AgendamentoTeste {
 	
 	@Test
 	public void pacienteMarcaHoraComMedico() {
+		
+		Mockery context = new JUnit4Mockery();
+
+		// ajustando o repositório de paciente
+		final PacienteRepositorio pacienteRep =  context.mock(PacienteRepositorio.class);
+		
+		context.checking(new Expectations() {{
+			Paciente paciente = new Paciente();
+			paciente.setNome("Maria");
+			
+			oneOf (pacienteRep).getPaciente(32L); will(returnValue(paciente));
+		}});
+		
+		// ajustando o repositório de médico
+		final MedicoRepositorio medicoRep = context.mock(MedicoRepositorio.class);
+		
+		context.checking(new Expectations() {{
+			Medico medico = new Medico();
+			medico.setNome("Dr. Gregory House");
+			
+			oneOf (medicoRep).getMedico(4L); will(returnValue(medico));
+		}});
+		
 		// um paciente...
-		Paciente paciente = new Paciente();
-		paciente.setNome("Maria");
+		Paciente paciente = pacienteRep.getPaciente(32L);
 		
 		// um médico...
-		Medico medico = new Medico();
-		medico.setNome("Dr. Gregory House");
+		Medico medico = medicoRep.getMedico(4L);
 		
 		// ambos agendam um horário
 		Agendamento agendamento = new AgendamentoImpl();

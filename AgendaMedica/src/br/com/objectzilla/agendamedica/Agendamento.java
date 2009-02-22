@@ -7,5 +7,5 @@ import javax.ejb.Local;
 @Local
 public interface Agendamento {
 
-	void marcaConsulta(Medico medico, Paciente paciente, Calendar horario);
+	void marcaConsulta(long medico, long paciente, Calendar horario);
 }

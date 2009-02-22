@@ -8,8 +8,22 @@ import javax.ejb.Stateless;
 public class AgendamentoImpl implements Agendamento {
 
 	@Override
-	public void marcaConsulta(Medico medico, Paciente paciente, Calendar horario) {
+	public void marcaConsulta(long medicoId, long pacienteId, Calendar horario) {
+		Paciente paciente = pacienteRepositorio.getPaciente(pacienteId);
+		Medico medico = medicoRepositorio.getMedico(medicoId);
+		
 		medico.consulta(paciente, horario);
-
 	}
+	
+	public void setPacienteRepositorio(PacienteRepositorio pacienteRep) {
+		pacienteRepositorio = pacienteRep;
+		
+	}
+
+	public void setMedicoRepositorio(MedicoRepositorio medicoRep) {
+		medicoRepositorio = medicoRep;		
+	}
+	
+	private PacienteRepositorio pacienteRepositorio;
+	private MedicoRepositorio medicoRepositorio;
 }

@@ -17,39 +17,48 @@ public class AgendamentoTeste {
 
 		// ajustando o repositório de paciente
 		final PacienteRepositorio pacienteRep =  context.mock(PacienteRepositorio.class);
+		final Paciente pacienteRetornado = new Paciente();
 		
 		context.checking(new Expectations() {{
-			Paciente paciente = new Paciente();
-			paciente.setNome("Maria");
+			pacienteRetornado.setNome("Maria");
 			
-			oneOf (pacienteRep).getPaciente(32L); will(returnValue(paciente));
+			oneOf (pacienteRep).getPaciente(32L); will(returnValue(pacienteRetornado));
 		}});
 		
 		// ajustando o repositório de médico
 		final MedicoRepositorio medicoRep = context.mock(MedicoRepositorio.class);
+		final Medico medicoRetornado = new Medico();
 		
 		context.checking(new Expectations() {{
-			Medico medico = new Medico();
-			medico.setNome("Dr. Gregory House");
+			medicoRetornado.setNome("Dr. Gregory House");
 			
-			oneOf (medicoRep).getMedico(4L); will(returnValue(medico));
+			oneOf (medicoRep).getMedico(4L); will(returnValue(medicoRetornado));
 		}});
 		
-		// um paciente...
-		Paciente paciente = pacienteRep.getPaciente(32L);
+		// id de paciente e médico
+		long pacienteId = 32L;
+		long medicoId = 4L;
 		
-		// um médico...
-		Medico medico = medicoRep.getMedico(4L);
+		// cria um agendamento, passando os repositórios como parâmetro
+		Agendamento agendamento;
+		{
+			AgendamentoImpl impl = new AgendamentoImpl();
+			impl.setPacienteRepositorio(pacienteRep);
+			impl.setMedicoRepositorio(medicoRep);
+			agendamento = impl;
+		}
 		
-		// ambos agendam um horário
-		Agendamento agendamento = new AgendamentoImpl();
+		// cria um horário para a consulta
 		Calendar horario = Calendar.getInstance();
 		horario.set(2009, Calendar.MARCH, 5, 17, 00, 00);
 		
-		agendamento.marcaConsulta(medico, paciente, horario);
+		agendamento.marcaConsulta(medicoId, pacienteId, horario);
+		
+		// verifica se os métodos definidos no mock foram realmente chamados
+		context.assertIsSatisfied();
 		
 		// agora, médico tem consulta com paciente marcada às 5
-		Paciente pacienteMarcado = medico.consulta(horario);
-		Assert.assertEquals(paciente.getNome(), pacienteMarcado.getNome());
+		Paciente pacienteMarcado = medicoRetornado.consulta(horario);
+		Assert.assertEquals(pacienteRetornado.getNome(), pacienteMarcado.getNome());
 	}
 }

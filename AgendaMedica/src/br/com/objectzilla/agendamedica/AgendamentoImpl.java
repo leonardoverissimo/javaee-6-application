@@ -2,6 +2,7 @@ package br.com.objectzilla.agendamedica;
 
 import java.util.Calendar;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 @Stateless
@@ -13,13 +14,17 @@ public class AgendamentoImpl implements Agendamento {
 		Medico medico = medicoRepositorio.getMedico(medicoId);
 		
 		medico.consulta(paciente, horario);
+		
+		medicoRepositorio.salvaConsultaMedico(medico);
 	}
 	
+	@EJB
 	public void setPacienteRepositorio(PacienteRepositorio pacienteRep) {
 		pacienteRepositorio = pacienteRep;
 		
 	}
-
+	
+	@EJB
 	public void setMedicoRepositorio(MedicoRepositorio medicoRep) {
 		medicoRepositorio = medicoRep;		
 	}

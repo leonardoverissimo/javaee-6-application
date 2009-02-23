@@ -36,6 +36,7 @@ public class AgendamentoTeste {
 				medicoRetornado.setNome("Dr. Gregory House");
 				
 				oneOf (medicoRep).getMedico(4L); will(returnValue(medicoRetornado));
+				oneOf (medicoRep).salvaConsultaMedico(medicoRetornado);
 			}});
 		} catch (MedicoNaoEncontradoException e1) { Assert.fail(); }
 		

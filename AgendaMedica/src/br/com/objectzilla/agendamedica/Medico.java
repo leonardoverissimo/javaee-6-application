@@ -6,6 +6,14 @@ import java.util.Map;
 
 public class Medico {
 	
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -21,7 +29,8 @@ public class Medico {
 	public void consulta(Paciente paciente, Calendar horario) {
 		agenda.put(horario, paciente);
 	}
-
+	
+	private long id;
 	private String nome;
 	private Map<Calendar, Paciente> agenda = new HashMap<Calendar, Paciente>();
 

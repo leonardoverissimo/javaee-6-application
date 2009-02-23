@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +14,26 @@ import javax.ejb.Singleton;
 
 @Singleton
 public class MedicoDAO implements MedicoRepositorio {
+	
+	public MedicoDAO() {
+		todos = new HashMap<Long, Medico>();
+		Medico m;
+		
+		m = new Medico();
+		m.setId(1);
+		m.setNome("Dr. Gregory House");
+		todos.put(m.getId(), m);
+		
+		m = new Medico();
+		m.setId(2);
+		m.setNome("Dr. Jack Shephard");
+		todos.put(m.getId(), m);
+		
+		m = new Medico();
+		m.setId(3);
+		m.setNome("Dr. Meredith Grey");
+		todos.put(m.getId(), m);
+	}
 
 	@Override
 	public Medico getMedico(long id) throws MedicoNaoEncontradoException {
@@ -33,8 +53,7 @@ public class MedicoDAO implements MedicoRepositorio {
 
 	@Override
 	public List<Medico> todosMedicos() {
-		Collection<Medico> medicos = copiaObjeto(todos.values());
-		return new ArrayList<Medico>(medicos);
+		return copiaObjeto(new ArrayList<Medico>(todos.values()));
 	}
 	
 	@SuppressWarnings("unchecked")

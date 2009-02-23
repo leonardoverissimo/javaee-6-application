@@ -1,10 +1,13 @@
 package br.com.objectzilla.agendamedica;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Medico {
+public class Medico implements Serializable {
+	
+	private static final long serialVersionUID = 7280903799887385565L;
 	
 	public long getId() {
 		return id;

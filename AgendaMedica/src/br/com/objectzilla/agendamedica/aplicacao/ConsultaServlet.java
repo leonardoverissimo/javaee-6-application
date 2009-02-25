@@ -1,4 +1,4 @@
-package br.com.objectzilla.agendamedica;
+package br.com.objectzilla.agendamedica.aplicacao;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.com.objectzilla.agendamedica.dominio.Medico;
+import br.com.objectzilla.agendamedica.dominio.MedicoRepositorio;
+import br.com.objectzilla.agendamedica.dominio.Paciente;
 
 @WebServlet(value="/consulta")
 public class ConsultaServlet extends HttpServlet {

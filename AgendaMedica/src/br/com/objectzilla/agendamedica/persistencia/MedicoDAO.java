@@ -1,4 +1,4 @@
-package br.com.objectzilla.agendamedica;
+package br.com.objectzilla.agendamedica.persistencia;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Singleton;
+
+import br.com.objectzilla.agendamedica.dominio.Medico;
+import br.com.objectzilla.agendamedica.dominio.MedicoNaoEncontradoException;
+import br.com.objectzilla.agendamedica.dominio.MedicoRepositorio;
 
 @Singleton
 public class MedicoDAO implements MedicoRepositorio {

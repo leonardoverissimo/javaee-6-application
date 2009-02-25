@@ -1,4 +1,4 @@
-package br.com.objectzilla.agendamedica;
+package br.com.objectzilla.agendamedica.dominio;
 
 import java.util.List;
 

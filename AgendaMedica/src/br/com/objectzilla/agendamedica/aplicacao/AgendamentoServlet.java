@@ -1,4 +1,4 @@
-package br.com.objectzilla.agendamedica;
+package br.com.objectzilla.agendamedica.aplicacao;
 
 import java.io.IOException;
 import java.io.PrintWriter;

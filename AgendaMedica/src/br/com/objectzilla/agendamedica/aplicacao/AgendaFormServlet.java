@@ -1,4 +1,4 @@
-package br.com.objectzilla.agendamedica;
+package br.com.objectzilla.agendamedica.aplicacao;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.com.objectzilla.agendamedica.dominio.Medico;
+import br.com.objectzilla.agendamedica.dominio.MedicoRepositorio;
+import br.com.objectzilla.agendamedica.dominio.Paciente;
+import br.com.objectzilla.agendamedica.dominio.PacienteRepositorio;
 
 @WebServlet(value="/agendaForm")
 public class AgendaFormServlet extends HttpServlet {

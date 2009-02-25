@@ -1,4 +1,4 @@
-package br.com.objectzilla.agendamedica;
+package br.com.objectzilla.agendamedica.dominio;
 
 import java.util.Calendar;
 
@@ -7,6 +7,8 @@ import org.jmock.Mockery;
 import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Assert;
 import org.junit.Test;
+
+import br.com.objectzilla.agendamedica.aplicacao.Agendamento;
 
 public class AgendamentoTeste {
 	

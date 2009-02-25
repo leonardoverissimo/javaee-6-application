@@ -1,4 +1,4 @@
-package br.com.objectzilla.agendamedica;
+package br.com.objectzilla.agendamedica.persistencia;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Singleton;
+
+import br.com.objectzilla.agendamedica.dominio.Paciente;
+import br.com.objectzilla.agendamedica.dominio.PacienteNaoEncontradoException;
+import br.com.objectzilla.agendamedica.dominio.PacienteRepositorio;
 
 @Singleton
 public class PacienteDAO implements PacienteRepositorio {

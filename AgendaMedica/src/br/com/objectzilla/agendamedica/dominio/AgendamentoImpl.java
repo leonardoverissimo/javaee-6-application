@@ -1,6 +1,6 @@
 package br.com.objectzilla.agendamedica.dominio;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -11,12 +11,12 @@ import br.com.objectzilla.agendamedica.aplicacao.Agendamento;
 public class AgendamentoImpl implements Agendamento {
 
 	@Override
-	public void marcaConsulta(long medicoId, long pacienteId, Calendar horario)
+	public void marcaConsulta(long medicoId, long pacienteId, Date horario)
 			throws PacienteNaoEncontradoException, MedicoNaoEncontradoException {
 		Paciente paciente = pacienteRepositorio.getPaciente(pacienteId);
 		Medico medico = medicoRepositorio.getMedico(medicoId);
 
-		medico.consulta(paciente, horario);
+		medico.marcaConsulta(paciente, horario);
 
 		medicoRepositorio.salvaConsultaMedico(medico);
 	}

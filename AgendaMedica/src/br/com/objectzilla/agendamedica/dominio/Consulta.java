@@ -22,35 +22,9 @@ public class Consulta implements Serializable {
 
 		for (HorarioDisponivel disponibilidade : disponibilidades) {
 			
-			if (inicioConsulta.get(Calendar.DAY_OF_WEEK) == disponibilidade.diaSemana.ordinal() + 1) {
-				Calendar limiteInicial = Calendar.getInstance();
-				// o dia seria igual à data marcada, apenas para não complicar
-				limiteInicial.setTime(inicio);
-
-				limiteInicial.set(Calendar.HOUR_OF_DAY, disponibilidade.horaInicial);
-				limiteInicial.set(Calendar.MINUTE, disponibilidade.minutoInicial);
-				limiteInicial.set(Calendar.SECOND, 0);
-
-				Calendar limiteFinal = Calendar.getInstance();
-				// o dia seria igual à data marcada, apenas para não complicar
-				limiteFinal.setTime(inicio);
-				// se hora final é menor que hora inicial, assumimos que a hora
-				// final refere-se ao dia seguinte. Exemplo: inicial: 22 e
-				// final: 04 significa um período que começa às 10 da noite de
-				// um dia e vai até às 4 da manhã do dia seguinte
-				if (disponibilidade.horaFinal < disponibilidade.horaInicial) {
-					limiteFinal.add(Calendar.DAY_OF_MONTH, 1);
-				}
-				
-				limiteFinal.set(Calendar.HOUR_OF_DAY, disponibilidade.horaFinal);
-				limiteFinal.set(Calendar.MINUTE, disponibilidade.minutoFinal);
-				limiteFinal.set(Calendar.SECOND, 0);
-				
-				// verifica se a data está no intervalo
-				if (inicioConsulta.compareTo(limiteInicial) >= 0 && finalConsulta.compareTo(limiteFinal) <= 0) {
-					disponivel = true;
-					break;
-				}
+			if (disponibilidade.isDentroHorario(inicioConsulta, finalConsulta)) {
+				disponivel = true;
+				break;
 			}
 		}
 
@@ -84,5 +58,4 @@ public class Consulta implements Serializable {
 	private Medico medico;
 	private Date inicio;
 	private Date fim;
-
 }

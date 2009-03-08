@@ -1,11 +1,9 @@
 package br.com.objectzilla.agendamedica.dominio;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class Medico implements Serializable {
@@ -28,14 +26,22 @@ public class Medico implements Serializable {
 		return nome;
 	}
 	
-	public Paciente consulta(Calendar horario) {
-		return agenda.get(horario);
-	}
-
-	public void consulta(Paciente paciente, Calendar horario) {
-		agenda.put(horario, paciente);
+	public void marcaConsulta(Paciente paciente, Date horario) {
+		Consulta novaConsulta = new Consulta(paciente, this, horario, 60);
+		if (getConsultas() == null) {
+			setConsultas(new HashSet<Consulta>());
+		}
+		getConsultas().add(novaConsulta);
 	}
 	
+	public Set<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(Set<Consulta> consultas) {
+		this.consultas = consultas;
+	}
+
 	public void adicioneDisponibilidade(HorarioDisponivel horarioDisponivel) {
 		disponibilidades.add(horarioDisponivel);	
 	}
@@ -46,6 +52,6 @@ public class Medico implements Serializable {
 	
 	private long id;
 	private String nome;
-	private Map<Calendar, Paciente> agenda = new HashMap<Calendar, Paciente>();
 	private Set<HorarioDisponivel> disponibilidades = new HashSet<HorarioDisponivel>();
+	private Set<Consulta> consultas;
 }

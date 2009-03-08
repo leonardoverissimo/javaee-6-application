@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.objectzilla.agendamedica.aplicacao.Agendamento;
+import br.com.objectzilla.agendamedica.dominio.HorarioDisponivel.DiaSemana;
 
 public class AgendamentoTeste {
 	
@@ -36,6 +37,7 @@ public class AgendamentoTeste {
 		try {
 			context.checking(new Expectations() {{
 				medicoRetornado.setNome("Dr. Gregory House");
+				medicoRetornado.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 17, 00, 18, 00));
 				
 				oneOf (medicoRep).getMedico(4L); will(returnValue(medicoRetornado));
 				oneOf (medicoRep).salvaConsultaMedico(medicoRetornado);
@@ -60,14 +62,15 @@ public class AgendamentoTeste {
 		horario.set(2009, Calendar.MARCH, 5, 17, 00, 00);
 		
 		try {
-			agendamento.marcaConsulta(medicoId, pacienteId, horario);
+			agendamento.marcaConsulta(medicoId, pacienteId, horario.getTime());
 			
 			// verifica se os métodos definidos no mock foram realmente chamados
 			context.assertIsSatisfied();
 			
 			// agora, médico tem consulta com paciente marcada às 5
-			Paciente pacienteMarcado = medicoRetornado.consulta(horario);
-			Assert.assertEquals(pacienteRetornado.getNome(), pacienteMarcado.getNome());
+			Assert.assertEquals(1, medicoRetornado.getConsultas().size());
+			Consulta consulta = medicoRetornado.getConsultas().iterator().next();
+			Assert.assertEquals(pacienteRetornado.getNome(), consulta.getPaciente().getNome());
 			
 		} catch (PacienteNaoEncontradoException e) {
 			Assert.fail();

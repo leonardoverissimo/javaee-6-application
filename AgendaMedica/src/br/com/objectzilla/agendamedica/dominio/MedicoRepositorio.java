@@ -10,6 +10,4 @@ public interface MedicoRepositorio {
 	Medico getMedico(long id) throws MedicoNaoEncontradoException;
 	
 	List<Medico> todosMedicos();
-	
-	void salvaConsultaMedico(Medico medico);
 }

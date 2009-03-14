@@ -38,7 +38,7 @@ public class ConsultaServlet extends HttpServlet {
 			horario.setTime(d);
 			req.setAttribute("horario", horario);
 			
-			Paciente paciente = medico.consulta(horario);
+			Paciente paciente = null;//medico.consulta(horario.getTime());
 			
 			if (paciente == null) {
 				paciente = new Paciente();

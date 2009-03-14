@@ -3,7 +3,6 @@ package br.com.objectzilla.agendamedica.aplicacao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.ejb.EJB;
@@ -35,11 +34,8 @@ public class AgendamentoServlet extends HttpServlet {
 			String horario = req.getParameter("dia") + " " + req.getParameter("hora");
 			Date date = dateFormat.parse(horario);
 
-			Calendar cal = Calendar.getInstance(req.getLocale());
-			cal.setTime(date);
-
 			// chamando método de agendamento
-			agendamento.marcaConsulta(medicoId, pacienteId, cal);
+			agendamento.marcaConsulta(medicoId, pacienteId, date);
 
 			resp.sendRedirect(resp.encodeRedirectURL("consulta?medicoId=" + medicoId
 					+ "&horario=" + horario));

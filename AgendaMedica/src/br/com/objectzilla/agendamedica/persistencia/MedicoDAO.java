@@ -50,12 +50,6 @@ public class MedicoDAO implements MedicoRepositorio {
 	}
 	
 	@Override
-	public void salvaConsultaMedico(Medico medico) {
-		todos.put(medico.getId(), medico);
-		
-	}
-
-	@Override
 	public List<Medico> todosMedicos() {
 		return copiaObjeto(new ArrayList<Medico>(todos.values()));
 	}

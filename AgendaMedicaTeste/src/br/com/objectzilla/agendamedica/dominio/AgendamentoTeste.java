@@ -1,6 +1,9 @@
 package br.com.objectzilla.agendamedica.dominio;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -30,8 +33,21 @@ public class AgendamentoTeste {
 			}});
 		} catch (PacienteNaoEncontradoException e) { Assert.fail(); }
 		
+		final List<Consulta> consultaRetornada = new LinkedList<Consulta>();
+		
 		// ajustando o repositório de médico
 		final MedicoRepositorio medicoRep = context.mock(MedicoRepositorio.class);
+		final ConsultaRepositorio consultaRep = new ConsultaRepositorio() {
+			@Override
+			public void marca(Consulta consulta) {
+				consultaRetornada.add(consulta);
+			}
+
+			@Override
+			public boolean existeConsultaPara(Medico medico, Date horario, int duracaoMinutos) {
+				return false;
+			}
+		};
 		final Medico medicoRetornado = new Medico();
 		
 		try {
@@ -40,7 +56,6 @@ public class AgendamentoTeste {
 				medicoRetornado.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 17, 00, 18, 00));
 				
 				oneOf (medicoRep).getMedico(4L); will(returnValue(medicoRetornado));
-				oneOf (medicoRep).salvaConsultaMedico(medicoRetornado);
 			}});
 		} catch (MedicoNaoEncontradoException e1) { Assert.fail(); }
 		
@@ -54,6 +69,7 @@ public class AgendamentoTeste {
 			AgendamentoImpl impl = new AgendamentoImpl();
 			impl.setPacienteRepositorio(pacienteRep);
 			impl.setMedicoRepositorio(medicoRep);
+			impl.setConsultaRepositorio(consultaRep);
 			agendamento = impl;
 		}
 		
@@ -68,8 +84,7 @@ public class AgendamentoTeste {
 			context.assertIsSatisfied();
 			
 			// agora, médico tem consulta com paciente marcada às 5
-			Assert.assertEquals(1, medicoRetornado.getConsultas().size());
-			Consulta consulta = medicoRetornado.getConsultas().iterator().next();
+			Consulta consulta = consultaRetornada.get(0);
 			Assert.assertEquals(pacienteRetornado.getNome(), consulta.getPaciente().getNome());
 			
 		} catch (PacienteNaoEncontradoException e) {
@@ -118,7 +133,6 @@ public class AgendamentoTeste {
 			Assert.fail();
 		}
 	}
-	
 	
 	@Test
 	public void consultaComMedicoInexistente() {

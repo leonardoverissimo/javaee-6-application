@@ -2,7 +2,6 @@ package br.com.objectzilla.agendamedica.dominio;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,14 +23,6 @@ public class Medico implements Serializable {
 	
 	public String getNome() {
 		return nome;
-	}
-	
-	public void marcaConsulta(Paciente paciente, Date horario) {
-		Consulta novaConsulta = new Consulta(paciente, this, horario, 60);
-		if (getConsultas() == null) {
-			setConsultas(new HashSet<Consulta>());
-		}
-		getConsultas().add(novaConsulta);
 	}
 	
 	public Set<Consulta> getConsultas() {

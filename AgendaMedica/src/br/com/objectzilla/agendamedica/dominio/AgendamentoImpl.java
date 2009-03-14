@@ -15,10 +15,8 @@ public class AgendamentoImpl implements Agendamento {
 			throws PacienteNaoEncontradoException, MedicoNaoEncontradoException {
 		Paciente paciente = pacienteRepositorio.getPaciente(pacienteId);
 		Medico medico = medicoRepositorio.getMedico(medicoId);
-
-		medico.marcaConsulta(paciente, horario);
-
-		medicoRepositorio.salvaConsultaMedico(medico);
+		
+		consultaRepositorio.marca(new Consulta(paciente, medico, horario, 60));
 	}
 
 	@EJB
@@ -31,7 +29,14 @@ public class AgendamentoImpl implements Agendamento {
 	public void setMedicoRepositorio(MedicoRepositorio medicoRep) {
 		medicoRepositorio = medicoRep;
 	}
+	
+	@EJB
+	public void setConsultaRepositorio(ConsultaRepositorio consultaRep) {
+		consultaRepositorio = consultaRep;
+	}
+	
 
 	private PacienteRepositorio pacienteRepositorio;
 	private MedicoRepositorio medicoRepositorio;
+	private ConsultaRepositorio consultaRepositorio;
 }

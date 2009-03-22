@@ -1,8 +1,14 @@
 package br.com.objectzilla.agendamedica.dominio;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class HorarioDisponivel {
+public class HorarioDisponivel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4345100051116400270L;
+	
 	public enum DiaSemana {
 		DOMINGO(Calendar.SUNDAY), SEGUNDA(Calendar.MONDAY), TERCA(Calendar.TUESDAY), QUARTA(
 				Calendar.WEDNESDAY), QUINTA(Calendar.THURSDAY), SEXTA(Calendar.FRIDAY), SABADO(

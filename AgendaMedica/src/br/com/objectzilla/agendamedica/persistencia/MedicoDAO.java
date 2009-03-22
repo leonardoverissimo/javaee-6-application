@@ -12,9 +12,11 @@ import java.util.Map;
 
 import javax.ejb.Singleton;
 
+import br.com.objectzilla.agendamedica.dominio.HorarioDisponivel;
 import br.com.objectzilla.agendamedica.dominio.Medico;
 import br.com.objectzilla.agendamedica.dominio.MedicoNaoEncontradoException;
 import br.com.objectzilla.agendamedica.dominio.MedicoRepositorio;
+import br.com.objectzilla.agendamedica.dominio.HorarioDisponivel.DiaSemana;
 
 @Singleton
 public class MedicoDAO implements MedicoRepositorio {
@@ -26,16 +28,46 @@ public class MedicoDAO implements MedicoRepositorio {
 		m = new Medico();
 		m.setId(1);
 		m.setNome("Dr. Gregory House");
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEGUNDA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEGUNDA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.TERCA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.TERCA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUARTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUARTA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEXTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEXTA, 14, 00, 17, 00));
 		todos.put(m.getId(), m);
 		
 		m = new Medico();
 		m.setId(2);
 		m.setNome("Dr. Jack Shephard");
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEGUNDA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEGUNDA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.TERCA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.TERCA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUARTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUARTA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEXTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEXTA, 14, 00, 17, 00));
 		todos.put(m.getId(), m);
 		
 		m = new Medico();
 		m.setId(3);
 		m.setNome("Dr. Meredith Grey");
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEGUNDA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEGUNDA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.TERCA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.TERCA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUARTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUARTA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.QUINTA, 14, 00, 17, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEXTA, 8, 00, 13, 00));
+		m.adicioneDisponibilidade(HorarioDisponivel.getInstance(DiaSemana.SEXTA, 14, 00, 17, 00));
 		todos.put(m.getId(), m);
 	}
 

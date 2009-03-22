@@ -4,10 +4,8 @@
 
 <html>
   <head>
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    	<title>GlassFish JSP Page</title>
+    	<meta http-equiv="Refresh" content="0; url=index.faces">
   </head>
   <body>
-    <h1>Hello World!</h1>
   </body>
 </html> 
